@@ -58,17 +58,21 @@ def send_summary_email(superviser):
 
 
 # Example of how to use the functions
-# receivers_list = ['1@gmail.com', '2@gmail.com']
-df = pd.read_excel(r'C:\Project\5. Marketing\Customer list\Minneapolis business_with emails.xlsx')
-receivers = df['contact email'][:50]
 
+df = pd.read_excel(r'C:\Project\5. Marketing\Customer list\Minneapolis business_with emails.xlsx', sheet_name='mlps')
+                #    , sheet_name='alternatives')
+receivers = df['contact email'][100:150]
+# receivers = df['contact email']
 
-# print(df['contact email'][:50])
+# print(df['contact email'])
 # print(len(df['contact email']))
 # print(len(df['contact email'][:50]))
 # print(type(df['contact email'][:50]))
 # print(recievers)
 
+
+# manually create the receiver list
+# receivers = ['alex@copperstreetbrass.org', 'tpuchtel@csmcorp.net', 'jrietz@csmcorp.net'] 
 
 
 # Send emails and record information
@@ -79,4 +83,8 @@ for id, receiver in enumerate(receivers):
 
 
 # Send the summary email after all emails are sent
-send_summary_email('raymond@epi2services.com')
+summary_receivers = ['raymond@epi2services.com', 'thomas@epi2services.com', 'terri@luacoffee.com', 'trinity@epi2services.com', 'yuqing@epi2services.com', 'cuong@epi2services.com']
+
+for id, s_receiver in enumerate(summary_receivers):
+    send_summary_email(s_receiver)
+    print('summary email sent', id+1)
