@@ -18,6 +18,7 @@ def mail_sent(receiver):
         mail.Subject = 'New Year New Goal'
 
         mail.HTMLBody = html_content
+        # mail.Importance = 2
 
         # Send the email
         mail.Send()
@@ -38,6 +39,7 @@ def send_summary_email(superviser):
     outlook = win32com.client.Dispatch('Outlook.Application')
     summary_mail = outlook.CreateItem(0)
     summary_mail.To = superviser
+    summary_mail.Importance = 0
     summary_mail.Subject = 'Email Summary Report'
 
     # Create the body of the summary email
@@ -61,7 +63,7 @@ def send_summary_email(superviser):
 
 df = pd.read_excel(r'C:\Project\5. Marketing\Customer list\Minneapolis business_with emails.xlsx', sheet_name='mlps')
                 #    , sheet_name='alternatives')
-receivers = df['contact email'][100:150]
+receivers = df['contact email'][300:350]
 # receivers = df['contact email']
 
 # print(df['contact email'])
