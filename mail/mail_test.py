@@ -1,25 +1,42 @@
+import win32com.client
+import pandas as pd
 
-import requests
-from bs4 import BeautifulSoup
-import re
+# List to store sent emails information
+sent_emails_info = []
+
+# Read HTML content outside the function
+with open(r'C:\Project\7. New tech\codesite\marketing_overkill\mail\html folder\start from zero\marketing_promo_march4.html', 'r', encoding='utf-8') as file:
+    html_content = file.read()
+
+def mail_sent(receiver):
+    global sent_emails_info
+
+    try:
+        outlook = win32com.client.Dispatch('Outlook.Application')
+        mail = outlook.CreateItem(0)
+        mail.To = receiver
+        mail.Subject = 'this is the updated version'
+
+        mail.HTMLBody = html_content
+        # mail.Importance = 2
+
+        # Send the email
+        mail.Send()
+
+        # Record sent email information
+        sent_emails_info.append({'receiver': receiver, 'status': 'Sent'})
+
+    except Exception as e:
+        # Handle exceptions, log the information, and continue
+        sent_emails_info.append({'receiver': receiver, 'status': f'Error: {str(e)}'})
 
 
-url = "https://aswy-zgpvh.campaign-view.com/ua/viewinbrowser?od=3zb2550a760b654ae4af11247436b4655d5a4791658f6060876768aa92067a41d0&rd=1755e77020216b9b&sd=1755e77020210a91&n=11699e4bf74b342&mrd=1755e77020210a7f&m=1"
+receivers = ['raymond@epi2services.com', 'terri@luacoffee.com', 'adriana@epi2services.com']
+# 'thomas@epi2services.com', 'terri@luacoffee.com', 'trinity@epi2services.com', 'yuqing@epi2services.com', 'cuong@epi2services.com', 
+# 'choua@epi2services.com', 'ly@epi2services.com']
 
 
-response = requests.get(url)
-html_content = response.text
-
-    # Parse the HTML content using BeautifulSoup
-soup = BeautifulSoup(html_content, 'html.parser')
-
-text = soup.get_text()
-
-# Remove extra blank lines
-cleaned_text = "\n".join(line for line in text.splitlines() if line.strip())
-
-print(cleaned_text)
-
-# with open('output.txt', 'w') as file:
-#     # Write text to the file
-#     file.write(cleaned_text)
+# Send emails and record information
+for id, receiver in enumerate(receivers):
+    mail_sent(receiver)
+    print('email sent', id+1)
