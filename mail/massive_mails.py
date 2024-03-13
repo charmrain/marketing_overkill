@@ -1,11 +1,12 @@
 import win32com.client
 import pandas as pd
+import tqdm
 
 # List to store sent emails information
 sent_emails_info = []
 
 # Read HTML content outside the function
-with open(r'C:\Project\7. New tech\codesite\marketing_overkill\mail\html folder\start from zero\test_Jan18.html', 'r', encoding='utf-8') as file:
+with open(r'C:\Project\7. New tech\codesite\marketing_overkill\mail\html folder\start from zero\marketing_promo_march4.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
 def mail_sent(receiver):
@@ -61,12 +62,20 @@ def send_summary_email(superviser):
 
 # Example of how to use the functions
 
-df = pd.read_excel(r'C:\Project\5. Marketing\Customer list\Minneapolis business_with emails.xlsx', sheet_name='mlps')
+# df = pd.read_excel(r'C:\Project\5. Marketing\Customer list\texas_contact.xlsx', sheet_name='mlps')
                 #    , sheet_name='alternatives')
-receivers = df['contact email'][300:350]
+# receivers = df['contact email'][350:]
 # receivers = df['contact email']
+        
+df = pd.read_excel(r'C:\Project\5. Marketing\Customer list\texas_contact.xlsx', sheet_name='contact')
 
-# print(df['contact email'])
+
+# receivers = df['alternative email2'].dropna().tolist() + df['alternative email1'].dropna().tolist() +df['alternative email3'].dropna().tolist() + df['alternative email4'].dropna().tolist()
+receivers =  df['primary_contact_email'][1000:1500]
+
+# print(df.head())
+# print(len(receivers))
+
 # print(len(df['contact email']))
 # print(len(df['contact email'][:50]))
 # print(type(df['contact email'][:50]))
@@ -85,7 +94,8 @@ for id, receiver in enumerate(receivers):
 
 
 # Send the summary email after all emails are sent
-summary_receivers = ['raymond@epi2services.com', 'thomas@epi2services.com', 'terri@luacoffee.com', 'trinity@epi2services.com', 'yuqing@epi2services.com', 'cuong@epi2services.com']
+summary_receivers = ['raymond@epi2services.com', 'thomas@epi2services.com', 'terri@luacoffee.com', 'trinity@epi2services.com',
+ 'yuqing@epi2services.com', 'cuong@epi2services.com', 'choua@epi2services.com', 'ly@epi2services.com', 'adriana@epi2services.com']
 
 for id, s_receiver in enumerate(summary_receivers):
     send_summary_email(s_receiver)
