@@ -71,7 +71,8 @@ df = pd.read_excel(r'C:\Project\5. Marketing\Customer list\texas_contact.xlsx', 
 
 
 # receivers = df['alternative email2'].dropna().tolist() + df['alternative email1'].dropna().tolist() +df['alternative email3'].dropna().tolist() + df['alternative email4'].dropna().tolist()
-receivers =  df['primary_contact_email'][1000:1500]
+receivers =  df['primary_contact_email'][5800:6000]
+
 
 # print(df.head())
 # print(len(receivers))
