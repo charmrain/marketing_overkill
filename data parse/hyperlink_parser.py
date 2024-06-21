@@ -10,6 +10,7 @@ def extract_webpage(city):
     city_url_component = city.replace(' ', '-')
     
     # Construct the URL with the city name
+    # need to change the state name according to which state to be extracted
     url = f"https://fastcashconsulting.com/city/{city_url_component}-tx"
     
     # Send a GET request
@@ -25,6 +26,7 @@ def extract_webpage(city):
         
         # Extract content within the <div class="listings"> tag
         listings_div = soup.find('div', class_='listings')
+        
         
         # If <div class="listings"> tag is found, extract its text preserving line breaks
         if listings_div:
@@ -48,6 +50,14 @@ def extract_webpage(city):
         else:
             hyperlinks = []
         
+
+
+
+
+
+
+
+
         return text, hyperlinks
     else:
         # If the request was not successful, return None
@@ -128,6 +138,9 @@ for i in tqdm(range(num_batches), desc="Scraping company info"):
             results_new.append(scrape_company_info(url))
         except Exception as e:
             print(f"Error processing URL {url}: {e}")
+            
+
+
         
             # You can choose to log errors or handle them as required
 
