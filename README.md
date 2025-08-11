@@ -49,13 +49,18 @@ I implemented a three-step solution:
 ---
 
 ## 📊 Workflow
-Website (semi-structured data)
-↓
-Web Crawler (scrapes text data)
-↓
-Data Parser (converts to structured CSV)
-↓
-Mass Email Sender (personalized outreach)
+
+1. **Data Source**
+   - Public website containing semi-structured customer information.
+
+2. **Web Crawling**
+   - Scrape text data using Python and BeautifulSoup4.
+
+3. **Data Parsing & Structuring**
+   - Convert semi-structured text into a structured CSV database.
+
+4. **Automated Outreach**
+   - Use the CSV database to send targeted marketing emails at scale.
 
 ---
 
